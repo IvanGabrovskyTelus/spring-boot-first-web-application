@@ -13,8 +13,8 @@ import com.in28minutes.springboot.web.service.LoginService;
 @Controller
 public class LoginController {
 	
-	@Autowired
-	LoginService loginService;
+//	@Autowired
+	LoginService loginService = new LoginService();
 	
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model) {

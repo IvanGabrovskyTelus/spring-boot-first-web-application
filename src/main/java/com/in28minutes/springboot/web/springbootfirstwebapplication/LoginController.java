@@ -18,11 +18,13 @@ public class LoginController {
 //	@Autowired
 	LoginService loginService = new LoginService();
 	
+	// show login JSP
 	@RequestMapping(value="/login", method = RequestMethod.GET)
 	public String showLoginPage(ModelMap model) {
 		return "login";
 	}
 	
+	// 
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String showWelcomePage(ModelMap model, @RequestParam String name, @RequestParam String password) {
 		boolean isValidUser = loginService.validateUser(name, password);

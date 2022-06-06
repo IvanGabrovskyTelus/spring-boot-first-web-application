@@ -6,11 +6,16 @@
 </head>
 
 <body>
-	<div class="container">		
+	<div class="container">
+	
+			
 		<form:form method="post" modelAttribute="todo">
+		<form:hidden path="id"/>
 			<fieldset class="form-group">
 				<form:label path="">Description</form:label>
-				<form:input path="desc" type="text" class="form-control" required="required"/>
+				<form:input path="desc" type="text" 
+				class="form-control" required="required"/>
+				<form:errors path="desc" csssClass="text-warning"/>
 			</fieldset>
  
 			<button type="submit" class="btn btn-success">Add</button>

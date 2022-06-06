@@ -31,6 +31,21 @@ public class TodoService {
         }
         return filteredTodos;
     }
+    
+    public Todo retrieveTodo(int id) {
+        List<Todo> filteredTodos = new ArrayList<Todo>();
+        for (Todo todo : todos) {
+            if (todo.getId()==id) {
+                return todo;
+            }
+        }
+        return null;
+    }
+    
+    public void updateTodo(Todo todo){
+    	todos.remove(todo);
+    	todos.add(todo);
+    }
 
     public void addTodo(String name, String desc, Date targetDate,
             boolean isDone) {

@@ -5,11 +5,13 @@
 </head>
 
 <body>
+input   {color: green;}	
 ADD Todo Page for ${name}
 	
 <form method="post">
-	Description : <input name="desc" type="text">
-	<input type="submit">add</input>	
+	Description : <br/><input name="desc" type="text">
+	<input type="submit">add</input>
+	
 </form>
 </body>
 

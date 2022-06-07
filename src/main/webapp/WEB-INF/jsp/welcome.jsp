@@ -1,11 +1,8 @@
-<HTML>
+<%@ include file="common/header.js"%>
+<%@ include file="common/navigation.js"%>
 
-<head>
-<title>First Web Application</title>
-</head>
+<div class="container">
 
-<body>
 	Welcome ${name}!! <a href="/list-todos">Click here</a> to manage your todo's
-</body>
-
-</HTML>
+</div>
+<%@ include file="common/footer.js"%>

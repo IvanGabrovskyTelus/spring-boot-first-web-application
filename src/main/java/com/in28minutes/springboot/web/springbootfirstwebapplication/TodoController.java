@@ -1,14 +1,18 @@
 package com.in28minutes.springboot.web.springbootfirstwebapplication;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,6 +28,13 @@ public class TodoController {
 	
 //	@Autowired
 	TodoService todoService = new TodoService();
+	
+	@InitBinder
+	protected void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(
+				dateFormat, false));
+	}
 	
 	@RequestMapping(value="/list-todos", method = RequestMethod.GET)
 	public String showTodos(ModelMap model) {
@@ -69,7 +80,7 @@ public class TodoController {
 		if(result.hasErrors()) {
 			return "todo";
 		}
-		todoService.addTodo((String) model.get("name"), todo.getDesc(), new Date(), false);
+		todoService.addTodo((String) model.get("name"), todo.getDesc(), todo.getTargetDate(), false);
 		return "redirect:/list-todos";
 	}
 	

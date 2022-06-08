@@ -14,14 +14,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 	public void configureGlobalSecurity(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.inMemoryAuthentication()
-            .passwordEncoder(NoOpPasswordEncoder.getInstance())
         		.withUser("in28Minutes").password("dummy")
                 .roles("USER", "ADMIN");
     }
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/login", "/h2-console/**").permitAll()
+        http.authorizeRequests().antMatchers("/login").permitAll()
                 .antMatchers("/", "/*todo*/**").access("hasRole('USER')").and()
                 .formLogin();
     }

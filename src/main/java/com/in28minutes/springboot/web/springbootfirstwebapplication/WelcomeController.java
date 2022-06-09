@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+@SessionAttributes("name")
 @Controller
 public class WelcomeController {
 	
@@ -26,7 +27,7 @@ public class WelcomeController {
 		Object principal = SecurityContextHolder.getContext()
 				.getAuthentication().getPrincipal();
 		if(principal instanceof UserDetails) {
-			((UserDetails)principal).getUsername();
+			return ((UserDetails)principal).getUsername();
 		}
 		return principal.toString();
 	}

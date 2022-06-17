@@ -19,22 +19,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
             throws Exception {
 		PasswordEncoder encoder = 
 		          PasswordEncoderFactories.createDelegatingPasswordEncoder();
-		    	auth
-		          .inMemoryAuthentication()
-		          .withUser("in28minutes")
-		          .password(encoder.encode("dummy"))
-		          .roles("USER", "ADMIN")
-		          .and()
-		          .withUser("in28Minutes")
-		          .password(encoder.encode("dummy"))
-		          .roles("USER", "ADMIN");
+//		    	auth
+//		          .inMemoryAuthentication()
+//		          .withUser("in28minutes")
+//		          .password(encoder.encode("dummy"))
+//		          .roles("USER", "ADMIN")
+//		          .and()
+//		          .withUser("in28Minutes")
+//		          .password(encoder.encode("dummy"))
+//		          .roles("USER", "ADMIN");
+		auth.inMemoryAuthentication().withUser("in28Minutes").password("dummy")
+				.roles("USER", "ADMIN");
     }
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().authorizeRequests().anyRequest().antMatchers("/login").permitAll()
-                .antMatchers("/", "/*todo*/**").access("hasRole('USER')").and()
-                .authenticated().formLogin().httpBasic();
+//        http.authorizeRequests().authorizeRequests().anyRequest().antMatchers("/login").permitAll()
+//                .antMatchers("/", "/*todo*/**").access("hasRole('USER')").and()
+//                .authenticated().formLogin().httpBasic();
+		http.authorizeRequests().antMatchers("/login").permitAll()
+				.antMatchers("/", "/*todo*/**").access("hasRole('USER')").and()
+				.formLogin()
+				.loginPage("/login")
+				.permitAll()
+				.and()
+				.logout()
+				.permitAll();
     }
 	
 	//Create a Login form
